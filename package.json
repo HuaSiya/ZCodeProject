@@ -1,0 +1,41 @@
+{
+  "name": "qing-vote",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "pnpm typecheck && vite build",
+    "preview": "vite preview",
+    "deploy": "pnpm build && wrangler deploy",
+    "typecheck": "tsc -p tsconfig.worker.json --noEmit && tsc -p tsconfig.json --noEmit",
+    "test:api": "node scripts/smoke-test.mjs",
+    "test:ui": "node scripts/ui-check.mjs",
+    "data:reset": "node scripts/reset-data.mjs",
+    "db:migrate:local": "wrangler d1 migrations apply qing-vote-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply qing-vote-db --remote",
+    "db:clear-rate-limits:local": "wrangler d1 execute qing-vote-db --local --command \"DELETE FROM rate_limits\""
+  },
+  "dependencies": {
+    "hono": "^4.13.19",
+    "lucide-react": "^1.74.0",
+    "qrcode.react": "^4.2.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-router-dom": "^7.18.5"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.70.0",
+    "@cloudflare/workers-types": "^5.20261118.1",
+    "@tailwindcss/vite": "^4.3.5",
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.3.0",
+    "playwright-core": "^1.65.1",
+    "tailwindcss": "^4.3.5",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8",
+    "wrangler": "^4.164.0"
+  }
+}
